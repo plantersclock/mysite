@@ -1,15 +1,16 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    
-    "scripts": {
-      "start": "node ./server/index.js",
-      "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-    },
-    "engines": {
-      "node": "14.5.0"
-    }
+  "name": "mysite",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8000",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "9.4.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   }
-  
+}
