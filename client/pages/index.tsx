@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Hello from '../components/hello'
-import BGTest from '../components/bgtest'
 import { GetServerSideProps } from 'next';
 import Link from 'next/link'
 
@@ -29,7 +28,7 @@ function Home( {data}: BGGProps) {
 
 export const getServerSideProps: GetServerSideProps<BGGProps> = async () => {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:8000/api/v2/pages/`)
+  const res = await fetch(`http://localhost:8000/api/v2/pages/?type=blog.BlogPage`)
   const response = await res.json()
   const data = response.items
   
