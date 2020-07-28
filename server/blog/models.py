@@ -44,7 +44,10 @@ class BlogListingPage(Page):
         return context
 
     api_fields = [
-        APIField("posts", serializer=BlogChildPagesSerializer(source="get_child_pages"))
+        APIField(
+            "posts",
+            serializer=BlogChildPagesSerializer(source="get_child_pages"),
+        )
     ]
 
     @property
@@ -69,7 +72,8 @@ class BlogPage(Page):
         APIField("blog_subtitle"),
         APIField("blog_post"),
         APIField(
-            "image", serializer=ImageRenditionField("max-500x500", source="blog_image")
+            "image",
+            serializer=ImageRenditionField("max-500x500", source="blog_image"),
         ),
     ]
 

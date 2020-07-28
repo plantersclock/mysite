@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from "../components/header";
+import About from "../components/about";
 import { GetServerSideProps } from "next";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
@@ -19,6 +20,7 @@ function Home({ data }: BGGProps) {
 
       <main>
         <Header name={data.name} />
+        <About summary={data.content.about.details.summary} />
         <Typography>
           <div
             dangerouslySetInnerHTML={{
