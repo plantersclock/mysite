@@ -11,6 +11,7 @@ from rest_framework.fields import Field
 
 from about.models import AboutMePage
 from blog.models import BlogListingPage, BlogPage
+from work.models import WorkListingPage, WorkPage
 
 
 class HomeChildPagesSerializer(Field):
@@ -35,26 +36,51 @@ class HomeChildPagesSerializer(Field):
                         "image": image_url,
                     }
                     details.append(grand_child_dict)
+
+            elif child.slug == "work":
+
+                jobs = WorkListingPage.objects.get(id=child.id).get_children()
+                for job in jobs:
+                    job_details = WorkPage.objects.get(id=job.id)
+
+                    image_url = Image.objects.get(
+                        id=job_details.work_image_id
+                    ).file.url
+
+                    image_w600 = (
+                        Image.objects.get(id=job_details.work_image_id)
+                        .get_rendition("width-600")
+                        .file.url
+                    )
+                    job_dict = {
+                        "id": job.id,
+                        "company": job.title,
+                        "job_title": job_details.job_title,
+                        "image": image_url,
+                        "image_6w00": image_w600,
+                    }
+                    details.append(job_dict)
+
             elif child.slug == "about":
                 details = {}
                 about_me_details = AboutMePage.objects.get(id=child.id)
 
                 image_150x150 = (
                     Image.objects.get(id=about_me_details.about_me_headshot_id)
-                    .get_rendition("fill-150x150")
+                    .get_rendition("max-150x150")
                     .file.url
                 )
 
-                image_500x500 = (
+                image_w600 = (
                     Image.objects.get(id=about_me_details.about_me_headshot_id)
-                    .get_rendition("fill-500x500")
+                    .get_rendition("width-600")
                     .file.url
                 )
 
                 detail = {
                     "summary": about_me_details.about_me_summary,
                     "image_150x150": image_150x150,
-                    "image_500x500": image_500x500,
+                    "image_w600": image_w600,
                 }
                 details.update(detail)
 
