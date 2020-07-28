@@ -1,16 +1,15 @@
-import Head from 'next/head'
-import Hello from '../components/hello'
-import { GetServerSideProps } from 'next';
-import Link from 'next/link'
-
+import Head from "next/head";
+import Header from "../components/header";
+import { GetServerSideProps } from "next";
+import Typography from "@material-ui/core/Typography";
+import Link from "next/link";
 
 interface BGGProps {
   data: any;
 }
 
-function Home( {data}: BGGProps) {
-
-  console.log(data)
+function Home({ data }: BGGProps) {
+  console.log(data.content.about.details);
   return (
     <div className="container">
       <Head>
@@ -19,22 +18,34 @@ function Home( {data}: BGGProps) {
       </Head>
 
       <main>
-        <Hello name="Matthew"/>
-        {data.map(item => <div><Link href="/blog/[id]" as={"/blog/"+item.id}>{item.title}</Link></div>)}
+        <Header name={data.name} />
+        <Typography>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data.content.about.details.summary,
+            }}
+          ></div>
+        </Typography>
+        {/* {data.map((item) => (
+          <div>
+            <Link href="/blog/[id]" as={"/blog/" + item.id}>
+              {item.title}
+            </Link>
+          </div>
+        ))} */}
       </main>
     </div>
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps<BGGProps> = async () => {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:8000/api/v2/pages/?type=blog.BlogPage`)
-  const response = await res.json()
-  const data = response.items
-  
+  const res = await fetch(`http://localhost:8000/api/v2/pages/3/`);
+  const response = await res.json();
+  const data = response;
 
   // Pass data to the page via props
-  return { props: { data } }
-}
+  return { props: { data } };
+};
 
-export default Home
+export default Home;
