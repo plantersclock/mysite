@@ -18,11 +18,7 @@ export default function About({ summary }: Props) {
           justify={"center"}
           alignContent={"flex-start"}
           className={styles.top}
-        >
-          <Typography className={styles.jobTitles}>
-            ANALYST & DEVELOPER
-          </Typography>
-        </Grid>
+        ></Grid>
 
         <Grid
           container

@@ -1,0 +1,101 @@
+.background {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+}
+
+.jobBackgroundImages {
+  background-color: black;
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.backgroundImage {
+  background-size: Contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  width: auto;
+}
+
+.companyName {
+  color: white;
+  font-size: 60px !important;
+  font-weight: 300 !important;
+  text-shadow: 2px 2px 8px #0000009a;
+}
+
+.jobTitle {
+  color: white;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  text-shadow: 2px 2px 8px #0000009a;
+  padding-bottom: 24px;
+}
+
+.moreCTA {
+  color: white;
+  background-color: white;
+  width: 60px;
+  height: 60px;
+}
+
+.links {
+  color: #0d0221;
+}
+
+.top {
+  padding-top: 24px;
+  height: 10vh;
+}
+
+.bottom {
+  padding-bottom: 24px;
+  height: 10vh;
+}
+
+.content {
+  padding: 10%;
+}
+
+.content li {
+  color: #f83674;
+}
+
+.topic {
+  color: #0d0221;
+  font-size: 100px !important;
+  font-weight: 300 !important;
+  text-transform: uppercase !important;
+}
+
+@media only screen and (max-width: 1920px) {
+  .name {
+    font-size: 132px !important;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .name {
+    font-size: 102px !important;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .name {
+    font-size: 60px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .name {
+    font-size: 38px !important;
+  }
+}

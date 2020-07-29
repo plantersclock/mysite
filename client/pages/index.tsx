@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Header from "../components/header";
 import About from "../components/about";
+import Work from "../components/work";
 import { GetServerSideProps } from "next";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
@@ -21,13 +22,8 @@ function Home({ data }: BGGProps) {
       <main>
         <Header name={data.name} />
         <About summary={data.content.about.details.summary} />
-        <Typography>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data.content.about.details.summary,
-            }}
-          ></div>
-        </Typography>
+        <Work data={data.content.work} />
+
         {/* {data.map((item) => (
           <div>
             <Link href="/blog/[id]" as={"/blog/" + item.id}>
