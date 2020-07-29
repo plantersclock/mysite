@@ -4,10 +4,16 @@ from wagtail.api import APIField
 from wagtail.images.api.fields import ImageRenditionField
 from wagtail.images.models import Image
 
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from rest_framework.fields import Field
 
@@ -83,4 +89,30 @@ class BlogPage(Page):
         ImageChooserPanel("blog_image"),
     ]
 
-    pass
+
+class Skill(TaggedItemBase):
+    content_object = ParentalKey(
+        "blog.Job",
+        related_name="skills",
+        on_delete=models.CASCADE,
+        blank=False,
+    )
+    label = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.label
+
+
+class Job(ClusterableModel):
+    name = models.CharField(max_length=32)
+    organization = models.CharField(max_length=32)
+    relevant_skills = ClusterTaggableManager(through=Skill, blank=True)
+    description = RichTextField()
+
+    content_panels = [
+        FieldPanel("name"),
+        FieldPanel("organization"),
+        FieldPanel("description"),
+        FieldPanel("skills", heading="Skills")
+    ]
+
