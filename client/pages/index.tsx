@@ -2,16 +2,17 @@ import Head from "next/head";
 import Header from "../components/header";
 import About from "../components/about";
 import Work from "../components/work";
+import Contact from "../components/contact";
 import { GetServerSideProps } from "next";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 
 interface BGGProps {
-  data: any;
+  home: any;
+  resume: any;
 }
 
-function Home({ data }: BGGProps) {
-  console.log(data.content.about.details);
+function Home({ home, resume }: BGGProps) {
   return (
     <div className="container">
       <Head>
@@ -20,17 +21,10 @@ function Home({ data }: BGGProps) {
       </Head>
 
       <main>
-        <Header name={data.name} />
-        <About summary={data.content.about.details.summary} />
-        <Work data={data.content.work} />
-
-        {/* {data.map((item) => (
-          <div>
-            <Link href="/blog/[id]" as={"/blog/" + item.id}>
-              {item.title}
-            </Link>
-          </div>
-        ))} */}
+        <Header name={home.name} />
+        <About summary={home.about_me_summary} />
+        <Work data={resume.content} />
+        <Contact />
       </main>
     </div>
   );
@@ -38,12 +32,37 @@ function Home({ data }: BGGProps) {
 
 export const getServerSideProps: GetServerSideProps<BGGProps> = async () => {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:8000/api/v2/pages/3/`);
-  const response = await res.json();
-  const data = response;
+
+  const [home, resume] = await Promise.all([
+    fetch(`http://localhost:8000/api/v2/pages/?slug=home`),
+    fetch(`http://localhost:8000/api/v2/pages/?slug=resume`),
+  ])
+    .then((responses) => {
+      return Promise.all(responses.map((response) => response.json()));
+    })
+    .then((data) =>
+      data.map((item) => {
+        return item.items[0].meta.detail_url;
+      })
+    )
+    .then((urls) => Promise.all(urls.map((url) => fetch(url))))
+    .then((responses) => {
+      return Promise.all(responses.map((response) => response.json()));
+    })
+    .then((data) => {
+      return data;
+    });
+
+  // console.log(resume);
+  // const resume_url = resume.items[0].meta.detail_url;
+  // console.log(resume_url);
+  // const res2 = await fetch(resume_url);
+  // const response = await res2.json();
+  // const data = response;
+  // console.log(data.content[0]);
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { home, resume } };
 };
 
 export default Home;

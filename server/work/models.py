@@ -2,8 +2,9 @@ from django.db import models
 
 from wagtail.api import APIField
 from wagtail.images.api.fields import ImageRenditionField
-
-
+from taggit.models import TaggedItemBase
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -24,6 +25,21 @@ class WorkChildPagesSerializer(Field):
             }
             return_jobs.append(post_dict)
         return return_jobs
+
+
+class WorkSkill(TaggedItemBase):
+    content_object = ParentalKey(
+        "work.WorkPage",
+        related_name="skills",
+        on_delete=models.CASCADE,
+        blank=False,
+    )
+    label = models.CharField(max_length=32)
+
+    panels = [FieldPanel("label")]
+
+    def __str__(self):
+        return self.label
 
 
 class WorkListingPage(Page):
@@ -57,18 +73,18 @@ class WorkPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    work_skills = ClusterTaggableManager(through=WorkSkill, blank=True)
 
     api_fields = [
         APIField("job_title"),
-        APIField(
-            "work_image",
-            serializer=ImageRenditionField("max-500x500", source="work_image"),
-        ),
+        APIField("work_image", serializer=ImageRenditionField("max-500x500"),),
+        APIField("work_skills"),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel("job_title"),
         ImageChooserPanel("work_image"),
+        FieldPanel("work_skills"),
     ]
 
     pass
