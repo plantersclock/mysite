@@ -15,10 +15,11 @@ export default function Work({ data }: Props) {
 
   useEffect(() => {
     if (expand !== null) {
-      let element = document.getElementById("expandedItem");
+      let element = document.getElementById("job-" + expand);
       element.scrollIntoView({
-        // behavior: "smooth",
+        behavior: "smooth",
       });
+      console.log("I Scrolled");
     }
   }, [expand]);
 
