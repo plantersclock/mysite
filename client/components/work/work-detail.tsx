@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./work.module.css";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 export default function WorkDetail({ expand, data, setExpand }: Props) {
   console.log(expand);
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", minHeight: "100vh" }}>
       {data.map((job, index) => {
         console.log(job);
         return (
@@ -54,9 +55,13 @@ export default function WorkDetail({ expand, data, setExpand }: Props) {
                   ""
                 ) : (
                   <Grid item container xs={12} justify={"center"}>
-                    <Typography className={styles.moreCTA}>
-                      <button onClick={() => setExpand(index)}>Click me</button>
-                    </Typography>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={() => setExpand(index)}
+                    >
+                      More
+                    </Button>
                   </Grid>
                 )}
               </Grid>
@@ -87,19 +92,15 @@ export default function WorkDetail({ expand, data, setExpand }: Props) {
 
                 <div
                   style={{
-                    margin: "auto",
-                    marginTop: "75px",
-                    backgroundColor: "#F83674",
-                    color: "white",
-                    width: 100,
-                    height: 50,
-                    borderRadius: 10,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    width: "100%",
                     display: "flex",
+                    justifyContent: "center",
+                    marginTop: 48,
                   }}
                 >
-                  <Typography>Resume</Typography>
+                  <Button variant="outlined" color="secondary">
+                    Resume
+                  </Button>
                 </div>
               </div>
             </div>

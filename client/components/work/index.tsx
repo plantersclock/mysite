@@ -33,7 +33,7 @@ export default function Work({ data }: Props) {
           expand != null ? styles.workHeaderWidthAfter : styles.workHeaderWidth
         }
       >
-        <WorkHeader expand={expand} />
+        <WorkHeader expand={expand} setExpand={setExpand} />
       </Grid>
 
       <Grid

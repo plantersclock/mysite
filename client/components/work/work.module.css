@@ -113,11 +113,32 @@
   padding-bottom: 24px;
 }
 
-.moreCTA {
-  color: white;
-  background-color: white;
-  width: 60px;
-  height: 60px;
+.unexpandButton {
+  height: 70px;
+  width: 10px;
+  background-color: #f83674;
+  position: absolute;
+  top: 11vh;
+  right: 0px;
+  z-index: 1;
+  display: flex;
+  padding-left: 15px;
+  font-family: roboto;
+  color: #0d0221;
+  cursor: pointer;
+}
+
+.unexpandButton:hover {
+  background-color: #bf0049;
+}
+
+.rotate90 {
+  transform: rotate(-90deg) !important;
+  -webkit-transform: rotate(-90deg) !important;
+  -moz-transform: rotate(-90deg) !important;
+  -ms-transform: rotate(-90deg) !important;
+  -o-transform: rotate(-90deg) !important;
+  display: inline-block;
 }
 
 .links {

@@ -5,9 +5,10 @@ import Typography from "@material-ui/core/Typography";
 
 interface Props {
   expand: any;
+  setExpand: any;
 }
 
-export default function WorkHeader({ expand }: Props) {
+export default function WorkHeader({ expand, setExpand }: Props) {
   return (
     <Grid container className={styles.background}>
       <Grid
@@ -28,6 +29,16 @@ export default function WorkHeader({ expand }: Props) {
         className={styles.backgroundImage}
       >
         <Typography className={styles.topic}>WORK</Typography>
+        {expand != null ? (
+          <div
+            className={styles.unexpandButton}
+            onClick={() => setExpand(null)}
+          >
+            <span className={styles.rotate90}>Shrink</span>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </Grid>
 
       <Grid
