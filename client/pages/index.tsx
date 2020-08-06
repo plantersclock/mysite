@@ -4,15 +4,13 @@ import About from "../components/about";
 import Work from "../components/work";
 import Contact from "../components/contact";
 import { GetServerSideProps } from "next";
-import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
 
-interface BGGProps {
+interface HomeProps {
   home: any;
   resume: any;
 }
 
-function Home({ home, resume }: BGGProps) {
+function Home({ home, resume }: HomeProps) {
   return (
     <div className="container">
       <Head>
@@ -30,7 +28,7 @@ function Home({ home, resume }: BGGProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<BGGProps> = async () => {
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   // Fetch data from external API
 
   const [home, resume] = await Promise.all([

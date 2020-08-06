@@ -116,7 +116,7 @@
 .unexpandButton {
   height: 70px;
   width: 10px;
-  background-color: #f83674;
+  background-color: #0d0221;
   position: absolute;
   top: 11vh;
   right: 0px;
@@ -124,12 +124,12 @@
   display: flex;
   padding-left: 15px;
   font-family: roboto;
-  color: #0d0221;
+  color: white;
   cursor: pointer;
 }
 
 .unexpandButton:hover {
-  background-color: #bf0049;
+  background-color: #322d48;
 }
 
 .rotate90 {

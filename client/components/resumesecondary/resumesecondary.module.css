@@ -1,0 +1,12 @@
+.panel {
+  color: #0d0221;
+  width: 100%;
+  height: 100vh;
+  padding-right: 10%;
+}
+
+.divider {
+  background-color: #f83674 !important;
+  height: 2px !important;
+  margin-top: 20px;
+}

@@ -3,6 +3,7 @@ import styles from "./work.module.css";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Link from "next/link";
 
 interface Props {
   expand: any;
@@ -56,7 +57,7 @@ export default function WorkDetail({ expand, data, setExpand }: Props) {
                 ) : (
                   <Grid item container xs={12} justify={"center"}>
                     <Button
-                      color="secondary"
+                      color="primary"
                       variant="contained"
                       onClick={() => setExpand(index)}
                     >
@@ -98,9 +99,11 @@ export default function WorkDetail({ expand, data, setExpand }: Props) {
                     marginTop: 48,
                   }}
                 >
-                  <Button variant="outlined" color="secondary">
-                    Resume
-                  </Button>
+                  <Link href={"/resume"}>
+                    <Button variant="outlined" color="secondary">
+                      Resume
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

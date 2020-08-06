@@ -1,0 +1,24 @@
+.headerContainer {
+  background-color: #0d0221;
+  height: auto;
+  padding: 20px;
+}
+
+.divider {
+  background-color: #f83674 !important;
+  height: 2px !important;
+  width: 300px;
+  margin-top: 20px;
+}
+
+.dividerFull {
+  background-color: #f83674 !important;
+  height: 2px !important;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.bullet {
+  color: #f83674;
+  padding-right: 12px;
+}

@@ -10,6 +10,9 @@ class Jobs(blocks.StructBlock):
     company = blocks.CharBlock(required=True, max_length=50)
     company_image = ImageChooserBlock(required=True)
     job_title = blocks.CharBlock(required=True, max_length=100)
+    job_location = blocks.CharBlock(required=True, max_length=100)
+    start_date = blocks.DateBlock(required=True)
+    end_date = blocks.DateBlock(required=False)
 
     experiences = blocks.ListBlock(
         blocks.StructBlock(
@@ -60,6 +63,9 @@ class Jobs(blocks.StructBlock):
         api_result = {
             "company": value.get("company"),
             "job_title": value.get("job_title"),
+            "job_location": value.get("job_location"),
+            "start_date": value.get("start_date"),
+            "end_date": value.get("end_date"),
             "company_image": value.get("company_image").file.url,
             "company_image_w600": value.get("company_image")
             .get_rendition("width-600")

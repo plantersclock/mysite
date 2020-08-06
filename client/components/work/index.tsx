@@ -19,7 +19,6 @@ export default function Work({ data }: Props) {
       element.scrollIntoView({
         behavior: "smooth",
       });
-      console.log("I Scrolled");
     }
   }, [expand]);
 
